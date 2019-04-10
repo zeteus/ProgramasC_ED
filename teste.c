@@ -1,52 +1,65 @@
-// Exercicio teste: programa que armazena datas de pessoas (sem especificar nomes)
+// Exercicio de ordenacao simples (Bubble Sort)
 
 #include <stdio.h>
 #include <stdlib.h>
 
-struct Date{
-    int day, year;
-    char[4] month;
-};
-typedef struct Date date;
-
-date* alocaArray(int q){
+int* preencheArray(int q){
+    int* vetor = (int*) malloc(sizeof(int) * q);
     
-    date* array = (date *) malloc (sizeof(date) * q);
-
-    return array;
+    for(int i = 0; i < q; i++){
+        printf("\nDIGITE UM NUMERO: ");
+        scanf("%d", &vetor[i]);
+    }
+    
+    return vetor;
 }
 
-void preencheArray(date* d, int q){
-
+void printaArray(int* vet, int q){
+    printf("\n");
     for(int i = 0; i < q; i++){
-        printf("DIGITE O DIA DA DATA DA POSICAO %d: ", (q + 1));
-        scanf("%d", d.day);
-        printf("DIGITE O MES DA DATA DA POSICAO %d: ", (q + 1));
-        scanf("%s", d.month);
-        printf("DIGITE O ANO DA DATA DA POSICAO %d: ", (q + 1));
-        scanf("%d", d.year);
-    };
+        printf("[%d]", vet[i]);
+    }
 }
 
-void printaDate(date* d, int q){
-    for(int i = 0; i < q; i++){
-        printf("DIA: %d MES: %s ANO: %d DA DATA DA POSICAO %d: ", d.day, d.month, d.year, (q + 1));     // Essa parte esta errada por conta da string
-    };
+void swap(int* a, int* b){
+    int aux;
+
+    aux = *a;
+    *a = *b;
+    *b = aux;
+
+}
+
+void bubbleSorth(int* vet, int q){
+    int continua;
+
+    do{
+        continua = 0;
+        for(int i = 0; i < q - 1; i++){
+            if(vet[i] > vet[i + 1]){
+                swap(&vet[i], &vet[i + 1]);
+                continua = i;
+            }
+        }
+        q --;
+    } while(continua != 0);
 }
 
 int main(){
     int qtd;
 
-    printf("QUANTAS DATAS DESEJA GUARDAR? ");
+    printf("DIGITE O TAMANHO DA ARRAY: ");
     scanf("%d", &qtd);
-    
-    date* d = alocaArray(qtd);
 
-    preencheArray(d, qtd);
+    int* array = preencheArray(qtd);
 
-    printaDate(d, qtd);
+    printaArray(array, qtd);    //ira printar a array original
 
-    free (d);
+    bubbleSorth(array, qtd);    //faz a ordenacao
+
+    printaArray(array, qtd);    //ira printar a array ordenada
+
+    free(array);
 
     return 0;
 }

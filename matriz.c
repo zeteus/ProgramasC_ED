@@ -97,13 +97,35 @@ int recuperaNLinhas (Matriz* mat){
 }
 
 Matriz* transposta (Matriz* mat){
-
+    
     return NULL;
 }
 
+/*Retorna a matriz multiplicacao entre mat1 e mat2
+* inputs: as matrizes mat1 e mat2
+* output: a matriz multiplica��o
+* pre-condicao: matrizes mat1 e mat2 existem, e o numero de colunas de mat1 
+* correponde ao numero de linhas de mat2 
+* pos-condicao: mat1 e mat2 n�o s�o modificadas e a matriz multiplicacao existe
+*/
 Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
+    if((matDefinida(mat1) != 1) || (matDefinida(mat2) != 1) || mat1->nColunas != mat2->nLinhas)
+        EXIT_FAILURE;
+    else{
+        Matriz *matMult = inicializaMatriz(mat1->nLinhas, mat2->nColunas);
+        
+        for(int i = 0; i < mat1->nLinhas, i ++){
+            for(int j = 0; j < mat2->nColunas, i++){
 
-    return NULL;
+                matMult->mat[i][j] = 0;
+                for(int k = 0; k < mat1->nColunas; k++){
+                    matMult->mat[i][j] += mat1->mat[i][k] * mat2->mat[k][j];
+                }
+            }
+        }
+
+        return matMult;
+    }
 }
 
 void imprimeMatriz(Matriz* mat){

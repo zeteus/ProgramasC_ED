@@ -15,7 +15,7 @@ int main()
 	Matriz* mat;
 	//chamando a funcao do TAD Matriz que inicializa a matriz 
 	mat = inicializaMatriz(NLINHAS, NCOLUNAS);
-/* int i, j;
+	int i, j;
 	//preenchendo a matriz com valores para teste
 	for (i=0;i<NLINHAS;i++)
 		for (j=0;j<NCOLUNAS; j++)
@@ -34,10 +34,10 @@ int main()
 	printf ("A matriz multiplicacao eh: \n");
 	imprimeMatriz(mlt);
 	printf ("A matriz girada 90o eh: \n");
-	giraMatriz(mlt);
+	//giraMatriz(mlt);
 	imprimeMatriz(mlt);
 
         destroiMatriz(mat);
         destroiMatriz(trp);
-	destroiMatriz(mlt); */
+		destroiMatriz(mlt);
 }

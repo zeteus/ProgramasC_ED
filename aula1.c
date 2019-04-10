@@ -1,5 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
+
+/* NOME: EZEQUIEL SCHNEIDER REINHOLTZ *
+ * TURMA: CCOMP 01                    *
+ *                                    */
 
 // EXERCICIO 1
 
@@ -70,77 +75,36 @@ void exercicio3(){
 
 //EXERCICIO 4
 
-// void preencheArray(void* a, int t, void v){
-//     for(int i = 0; i < t; i++){
-//         *(a + i) = v;
-//     }
-// }
+void preencheArray(int* a, int t, int v){
+    for(int i = 0; i < t; i++){
+        *(a + i) = v;
+    }
+}
 
-// void exercicio4(){
-//     printf("\n\n--EXERCICIO 4--\n");
+void exercicio4(){
+    printf("\n\n--EXERCICIO 4--\n");
 
-//     void *array, valor;
-//     int lenght;
-//     char typeValor;
+    int *array, inteiro, lenght;
 
-//     printf("DIGITE O TAMANHO DA ARRAY: ");
-//     scanf("%d", &lenght);
+    printf("DIGITE O TAMANHO DA ARRAY: ");
+    scanf("%d", &lenght);
 
-//     do{
-//         printf("DIGITE O TIPO DO VALOR (I, F OU C): ");
-//         scanf("%c", &typeValor);
-//     switch (typeValor)
-//     {
-//         case 'i':
-//         case 'I':
-//             int inteiro;
-//             printf("DIGITE UM VALOR INTEIRO: ");
-//             scanf("%d", &inteiro);
+    printf("DIGITE UM VALOR INTEIRO: ");
+    scanf("%d", &inteiro);
 
-//             array = (int*) malloc(sizeof(int) * lenght);
+    array = (int*) malloc(sizeof(int) * lenght);
 
-//             preencheArray(array, lenght, inteiro);
+    preencheArray(array, lenght, inteiro);
 
-//             free(array);
-//             break;
+    for(int i = 0; i < lenght; i ++){
+        printf("%d ", array[i]);
+    }
 
-//         case 'f':
-//         case 'F':
-//             float real;
-//             printf("DIGITE UM VALOR REAL: ");
-//             scanf("%f", &real);
-
-//             array = (float*) malloc(sizeof(float) * lenght);
-
-//             preencheArray(array, lenght, real);
-
-//             free(array);
-//             break;
-
-//         case 'c':
-//         case 'C':
-//             char caracter;
-//             printf("DIGITE UM CARACTER: ");
-//             scanf("%d", &caracter);
-
-//             array = (char*) malloc(sizeof(char) * lenght);
-
-//             preencheArray(array, lenght, caracter);
-
-//             free(array);
-//             break;
-        
-//         default:
-//             break;
-//     }
-//     } while(typeValor != 'c' || typeValor != 'C' || typeValor != 'f' || typeValor != 'F' || typeValor != 'i' || typeValor != 'i')
-
-//     for(int i = 0; i < lenght; i ++){
-//         printf("%d ", array[i]);
-//     }
-// }
+    free(array);
+}
 
 //EXERCICIO 6
+
 void swap(int* a, int* b){
     int c;
 
@@ -150,12 +114,10 @@ void swap(int* a, int* b){
 
 }
 void inverte(int n, int* vet){
-    // int *invet = (int*) malloc(sizeof(int) * n);
-    int invet = *vet;
-    int j = n;
+    int j = n - 1;
 
-    for(int i = 0; i < n; i ++){
-        swap(&i, &j);
+    for(int i = 0; i < j; i ++){
+        swap(&(vet[i]), &(vet[j]));
         j --;
     }
 
@@ -187,14 +149,59 @@ void exercicio6(){
     free(vet);
 }
 
+// EXERCICIO 7
+
+
+int ocorre(char* str1, char* str2){
+	int i = 0;
+	int j = 0;
+
+	int str1_len = strlen(str1);
+	int str2_len = strlen(str2);
+
+	int repete = 0;
+
+	for( i = 0 ; i < str1_len ; i++ ){
+		if( *(str1 + i) == *(str2) ){
+			for( j = 0 ; j < str2_len ; j++ ){
+				if( i + j >= str1_len ) break;
+				if( *(str1 + i + j) == *(str2 + j) ) repete++;
+			}
+			if( repete == str2_len ) return 1;
+			else{
+				repete = 0;
+				continue;
+			}
+		}
+	}
+
+	return 0;
+}
+
+void exercicio7(){
+    char *str1 = (char*) malloc(sizeof(char) * 30);
+    char *str2 = (char*) malloc(sizeof(char) * 30);
+
+    printf("DIGITE UMA PALAVRA: ");
+    scanf("%s", str1);
+    printf("DIGITE OUTRA PALAVRA: ");
+    scanf("%s", str2);
+
+    if(ocorre(str1, str2)) printf("ESTA CONTIDA!");
+    else printf("NAO ESTA CONTIDA!");
+    
+    free(str1);
+    free(str2);
+}
+
 int main(){
     
     //exercicio1();
     //exercicio2();
     //exercicio3();
     //exercicio4();
-    exercicio6();
-    //exercicio7();
+    //exercicio6();
+    exercicio7();
 
     return 0;
 }

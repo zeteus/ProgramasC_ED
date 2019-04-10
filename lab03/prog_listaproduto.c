@@ -4,11 +4,7 @@ int main(){
     tProduto prod;
     tLista lista;
 
-    prod.codigo = 15;
-    prod.nome[0] = 'A';
-    prod.nome[1] = '\0';
-    prod.preco = 1;
-    prod.qtd = 5;
+    criaProduto(&prod);
 
     /*Cria a lista*/
     FazVazia(&lista);

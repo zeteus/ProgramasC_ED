@@ -19,6 +19,15 @@ typedef struct {
     tProduto prod[MAX];
     Posicao Primeiro, Ultimo;
 } tLista;
+/*--------------------------------------------------------*/
+/*_________Funcoes para manipulacao dos produtos__________*/
+void criaProduto(tProduto* p);
+/*--------------------------------------------------------*/
+
+
+
+/*--------------------------------------------------------*/
+/*_________Funcoes para manipulacao de listas_____________*/
 
 /*Faz a lista se tornar vazia*/
 void FazVazia(tLista *l); // ok
@@ -40,5 +49,6 @@ int Quantidade(tLista l);
 
 // /*De acordo com o codigo do produto retorna o mesmo*/
 // tProduto buscacodigo(tLista *l, int cod);
+/*--------------------------------------------------------*/
 
 #endif /*LISTAPROD_H_*/

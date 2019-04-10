@@ -1,24 +1,39 @@
 #include "listaproduto.h"
 
+void criaProduto(tProduto* p)
+{
+    printf("CODIGO DO PRODUTO:");
+    scanf("%d", &p -> codigo);
+    printf("NOME DO PRODUTO:");
+    scanf("%[^\n]", &p -> nome);
+    printf("PRECO DO PRODUTO:");
+    scanf("%f", &p -> preco);
+    printf("QUANTIDADE DE PRODUTOS:");
+    scanf("%d", &p -> qtd);
+}
+
 /*Faz a lista se tornar vazia*/
-void FazVazia(tLista *l){
+void FazVazia(tLista *l)
+{
     l -> Primeiro = INICIO;
     l -> Ultimo = l -> Primeiro;
 }
 
 /*Verifica se a lista esta vazia*/
-int Vazia(tLista l){
+int Vazia(tLista l)
+{
     return (l.Primeiro == l.Ultimo);
 }
 
 /* Insere x apos o ultimo elemento da lista */
-void Insere(tProduto p, tLista *l){
+void Insere(tProduto p, tLista *l)
+{
     if(l -> Ultimo > MAX)
         printf("LISTA CHEIA");
-    else {
+    else{
         l -> prod[l -> Ultimo - 1] = p;
         l -> Ultimo++;
-    }
+        }
 }
 
 // /*Opcao que nao modifica o lista.h */
@@ -26,15 +41,18 @@ void Insere(tProduto p, tLista *l){
 
 /*Imprime a lista*/
 void ImprimeLista(tLista l)
-{ int Aux;
+{ 
+    int Aux;
 
-  for (Aux = l.Primeiro - 1; Aux <= (l.Ultimo - 2); Aux++)
-    printf("cod = %d\nnome = %s\npreco = %.2f\nqtd = %d\n", l.prod[Aux].codigo, l.prod[Aux].nome, l.prod[Aux].preco, l.prod[Aux].qtd);
+    for (Aux = l.Primeiro - 1; Aux <= (l.Ultimo - 2); Aux++)
+        printf("cod = %d\nnome = %s\npreco = %.2f\nqtd = %d\n", l.prod[Aux].codigo, l.prod[Aux].nome, l.prod[Aux].preco, l.prod[Aux].qtd);
 }
 
 /*Quantidade de elementos na lista*/
-int Quantidade(tLista l){
-    if(Vazia(l)){
+int Quantidade(tLista l)
+{
+    if(Vazia(l))
+    {
         return 0;
     }
 

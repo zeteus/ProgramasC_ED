@@ -136,7 +136,7 @@ Matriz* transposta (Matriz* mat){
 Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
     if((matDefinida(mat1) != 1) || (matDefinida(mat2) != 1) || mat1->nColunas != mat2->nLinhas)
         EXIT_FAILURE;
-    else
+    else{
         Matriz *matMult = inicializaMatriz(mat1->nLinhas, mat2->nColunas);
         
         for(int i = 0; i < mat1->nLinhas, i ++){
@@ -150,6 +150,7 @@ Matriz* multiplicacao (Matriz* mat1, Matriz* mat2){
         }
 
         return matMult;
+    }
 }
 
 /*Imprime a matriz

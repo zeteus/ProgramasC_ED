@@ -5,7 +5,7 @@ void criaProduto(tProduto* p)
     printf("CODIGO DO PRODUTO:");
     scanf("%d", &p -> codigo);
     printf("\nNOME DO PRODUTO:");
-    scanf("%[^\n]", &p -> nome);
+    scanf(" %29[^\n]", p -> nome);
     printf("\nPRECO DO PRODUTO:");
     scanf("%f", &p -> preco);
     printf("\nQUANTIDADE DE PRODUTOS:");
@@ -44,7 +44,7 @@ void ImprimeLista(tLista l)
 { 
     int Aux;
 
-    for (Aux = l.Primeiro - 1; Aux <= (l.Ultimo - 2); Aux++)
+    for (Aux = l.Primeiro - 1; Aux < l.Ultimo; Aux++)
         printf("cod = %d\nnome = %s\npreco = %.2f\nqtd = %d\n", l.prod[Aux].codigo, l.prod[Aux].nome, l.prod[Aux].preco, l.prod[Aux].qtd);
 }
 

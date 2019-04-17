@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
 #include "listaencadeada.h"
 
 /* Faz a lista ficar vazia */

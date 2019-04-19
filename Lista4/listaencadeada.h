@@ -35,20 +35,26 @@ int Vazia(TipoLista Lista);
 /* Insere x apos o ultimo elemento da lista */
 void Insere(Produto x, TipoLista *Lista);
 
-/** Busca um produto pelo codigo - retornando a celula inteira*/
+/* Busca um produto pelo codigo - retornando a celula inteira*/
 TipoApontador BuscaCodigo(int codigo, TipoLista *Lista);
 
-/*Retira um elemento da lista */
+/* libera na memória uma celula */
+void LiberaCelula(TipoCelula *celula);
+
+/* Retira uma celula da lista encadeada */
+void RetiraCelula(TipoCelula *anterior, TipoCelula *retirar);
+
+/* Retira um elemento da lista */
 void Retira(int codigo, TipoLista *Lista, Produto *Item);
 
 
-/*Imprime a lista */
+/* Imprime a lista */
 void ImprimeLista(TipoLista Lista);
 
-/*Quantidade de elementos na lista*/
+/* Quantidade de elementos na lista */
 int Quantidade(TipoLista Lista);
 
-/**FUNCOES OPACAS DO STRUCT PRODUTO **/
+/** FUNCOES OPACAS DO STRUCT PRODUTO **/
 Produto  criaProduto(int cod, char *nome, int qtd, float preco);
 
 void ImprimeProduto(Produto p);

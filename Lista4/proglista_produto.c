@@ -33,7 +33,7 @@ int main(int argc, char *argv[])
   ImprimeLista(lista);
   TipoApontador p = BuscaCodigo(3, &lista);
   ImprimeProduto(p->Item);
-  item = maisBarato(&lista);
-  Imprime(item);
+//  item = maisBarato(&lista);
+//  Imprime(item);
   return(0);
 }

@@ -48,19 +48,36 @@ TipoApontador BuscaCodigo(int codigo, TipoLista *Lista){
     return NULL;
 }
 
+/* libera na memória uma celula */
+void LiberaCelula(TipoCelula *celula){
+    free(celula->Item.nome);
+    free(celula);
+}
+
+/* Retira uma celula da lista encadeada */
+void RetiraCelula(TipoCelula *anterior, TipoCelula *retirar){
+    anterior->Prox = retirar->Prox;
+    LiberaCelula(retirar);
+}
+
 /*Retira um elemento da lista */
 void Retira(int codigo, TipoLista *Lista, Produto *Item){
-    TipoApontador celula = Lista -> Primeiro;
     
     if(Vazia(Lista) == 0)
     {
-        while(celula -> Prox != NULL)
+        TipoApontador anterior = NULL;
+        TipoApontador retirar = Lista -> Primeiro;
+        do
         {
-            if(celula -> item.codigo == codigo)
+            if(celula -> Item.codigo == codigo)
             {
-                
+                removeCelula(retirar, anterior);
             }
-        }
+            
+            anterior = retirar;
+            retirar = retirar -> Prox;
+
+        } while(retirar -> Prox != NULL);
     }
 }
 
@@ -81,7 +98,7 @@ void ImprimeLista(TipoLista Lista){
     }
 }
 
-/*Quantidade de elementos na lista*/
+/* Quantidade de elementos na lista */
 int Quantidade(TipoLista Lista){
     if(Vazia(Lista)) return 0;
     
@@ -96,7 +113,7 @@ int Quantidade(TipoLista Lista){
     return cont;
 }
 
-/**FUNCOES OPACAS DO STRUCT PRODUTO **/
+/** FUNCOES OPACAS DO STRUCT PRODUTO **/
 Produto  criaProduto(int cod, char *nome, int qtd, float preco){
     Produto p;
 

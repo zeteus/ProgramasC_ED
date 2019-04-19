@@ -9,8 +9,10 @@ void FLVazia(TipoLista *Lista)
 
 /*Verifica se a lista esta vazia*/
 int Vazia(TipoLista Lista){
-    if(Lista -> Primeiro != NULL && Lista -> Ultimo != Lista -> Primeiro)   return 0;
-    else return 1;
+    if(Lista.Primeiro != NULL && Lista.Ultimo != Lista.Primeiro)
+        return 0;
+    else
+        return 1;
 }
 
 /* Insere x apos o ultimo elemento da lista */
@@ -29,7 +31,19 @@ void Insere(Produto x, TipoLista *Lista){
 
 /** Busca um produto pelo codigo - retornando a celula inteira*/
 TipoApontador BuscaCodigo(int codigo, TipoLista *Lista){
-    return produto;
+    TipoApontador celula = Lista -> Primeiro;
+    
+    if(Vazia(Lista) == 0)
+    {
+        while(celula -> Prox != NULL)
+        {
+            if(celula -> Item.codigo == codigo)
+            {
+                return celula -> Item;
+            }
+        }
+    }
+    return NULL;
 }
 
 /*Retira um elemento da lista */

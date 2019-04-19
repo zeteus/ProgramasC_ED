@@ -29,18 +29,21 @@ void Insere(Produto x, TipoLista *Lista){
     }
 }
 
-/** Busca um produto pelo codigo - retornando a celula inteira*/
+/* Busca um produto pelo codigo - retornando a celula inteira*/
 TipoApontador BuscaCodigo(int codigo, TipoLista *Lista){
-    TipoApontador celula = Lista -> Primeiro;
     
     if(Vazia(Lista) == 0)
     {
+        TipoApontador celula = Lista -> Primeiro;
+        
         while(celula -> Prox != NULL)
         {
             if(celula -> Item.codigo == codigo)
             {
-                return celula -> Item;
+                return celula;
             }
+
+            celula = celula -> Prox;
         }
     }
     return NULL;

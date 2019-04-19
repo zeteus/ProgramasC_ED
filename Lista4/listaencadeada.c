@@ -36,15 +36,14 @@ TipoApontador BuscaCodigo(int codigo, TipoLista *Lista){
     {
         TipoApontador celula = Lista -> Primeiro;
         
-        while(celula -> Prox != NULL)
+        do
         {
             if(celula -> Item.codigo == codigo)
             {
                 return celula;
             }
-
             celula = celula -> Prox;
-        }
+        } while(celula -> Prox != NULL);
     }
     return NULL;
 }

@@ -54,9 +54,15 @@ void ImprimeLista(TipoLista Lista);
 /* Quantidade de elementos na lista */
 int Quantidade(TipoLista Lista);
 
+/* Libera toda a lista encadeada */
+void LiberaLista(TipoLista *Lista);
+
 /** FUNCOES OPACAS DO STRUCT PRODUTO **/
+
+/* Cria uma variavel do tipo produto e retorna a mesma */
 Produto  criaProduto(int cod, char *nome, int qtd, float preco);
 
+/* Imprime uma variavel do tipo Produto */
 void ImprimeProduto(Produto p);
 
 

@@ -9,7 +9,7 @@ void FLVazia(TipoLista *Lista)
 
 /*Verifica se a lista esta vazia*/
 int Vazia(TipoLista Lista){
-    if(Lista.Primeiro != NULL && Lista.Ultimo != Lista.Primeiro)
+    if(Lista.Primeiro != NULL)
         return 0;
     else
         return 1;
@@ -17,7 +17,7 @@ int Vazia(TipoLista Lista){
 
 /* Insere x apos o ultimo elemento da lista */
 void Insere(Produto x, TipoLista *Lista){
-    if(Vazia(Lista)){
+    if(Vazia(*Lista)){
         Lista -> Primeiro = Lista -> Ultimo = (TipoApontador) malloc(sizeof(TipoCelula));
         Lista -> Primeiro -> Item = x;
         Lista -> Primeiro -> Prox = NULL;
@@ -32,7 +32,7 @@ void Insere(Produto x, TipoLista *Lista){
 /* Busca um produto pelo codigo - retornando a celula inteira*/
 TipoApontador BuscaCodigo(int codigo, TipoLista *Lista){
     
-    if(Vazia(Lista) == 0)
+    if(Vazia(*Lista) == 0)
     {
         TipoApontador celula = Lista -> Primeiro;
         
@@ -56,28 +56,47 @@ void LiberaCelula(TipoCelula *celula){
 
 /* Retira uma celula da lista encadeada */
 void RetiraCelula(TipoCelula *anterior, TipoCelula *retirar){
-    anterior->Prox = retirar->Prox;
+    anterior -> Prox = retirar -> Prox;
     LiberaCelula(retirar);
 }
 
 /*Retira um elemento da lista */
 void Retira(int codigo, TipoLista *Lista, Produto *Item){
     
-    if(Vazia(Lista) == 0)
+    if(Vazia(*Lista) == 0)
     {
         TipoApontador anterior = NULL;
-        TipoApontador retirar = Lista -> Primeiro;
-        do
-        {
-            if(celula -> Item.codigo == codigo)
-            {
-                removeCelula(retirar, anterior);
-            }
-            
-            anterior = retirar;
-            retirar = retirar -> Prox;
+        TipoApontador alvo = Lista -> Primeiro;
 
-        } while(retirar -> Prox != NULL);
+        while(alvo != NULL && alvo -> Item.codigo != codigo)
+        {
+            anterior = alvo;
+            alvo = alvo -> Prox;
+        }
+
+        if(alvo == NULL)    return;
+
+        if(alvo == Lista -> Primeiro && alvo == Lista -> Ultimo)
+        {
+            Lista -> Primeiro = alvo -> Prox;
+            Lista -> Ultimo = NULL;
+        }
+
+        if(alvo == Lista -> Primeiro)
+        {
+            Lista -> Primeiro = alvo -> Prox;            
+        }
+        
+        if(alvo == Lista -> Ultimo)
+        {
+            Lista -> Ultimo = anterior;
+            anterior -> Prox = NULL;
+        }
+        else
+        {
+            anterior -> Prox = alvo -> Prox;
+        }
+        LiberaCelula(alvo);
     }
 }
 
@@ -88,9 +107,9 @@ void ImprimeLista(TipoLista Lista){
     {
         printf("LISTA VAZIA\n");
     } else{
-        TipoApontador celula = Lista -> Primeiro;
+        TipoApontador celula = Lista.Primeiro;
     
-        while(celula -> Prox != NULL)
+        while(celula != NULL)
         {
             ImprimeProduto(celula -> Item);
             celula = celula -> Prox;
@@ -103,7 +122,7 @@ int Quantidade(TipoLista Lista){
     if(Vazia(Lista)) return 0;
     
     int cont = 1;
-    TipoApontador referencia = Lista -> Primeiro;
+    TipoApontador referencia = Lista.Primeiro;
     
     while(referencia -> Prox != NULL)
     {
@@ -113,7 +132,22 @@ int Quantidade(TipoLista Lista){
     return cont;
 }
 
+/* Libera toda a lista encadeada */
+void LiberaLista(TipoLista *Lista)
+{
+
+    TipoApontador AuxDestruidor = NULL;
+    while(Vazia(*Lista) == 0)
+    {
+        AuxDestruidor = Lista -> Primeiro;
+        Lista -> Primeiro = Lista -> Primeiro-> Prox;
+        LiberaCelula(AuxDestruidor);
+    }
+}
+
 /** FUNCOES OPACAS DO STRUCT PRODUTO **/
+
+/* Cria uma variavel do tipo produto e retorna a mesma */
 Produto  criaProduto(int cod, char *nome, int qtd, float preco){
     Produto p;
 
@@ -126,9 +160,10 @@ Produto  criaProduto(int cod, char *nome, int qtd, float preco){
     return p;
 }
 
+/* Imprime uma variavel do tipo Produto */
 void ImprimeProduto(Produto p){
     printf("CODIGO: %d\n", p.codigo);
     printf("NOME: %s\n", p.nome);
-    printf("PRECO: %d\n", p.preco);
+    printf("PRECO: %f\n", p.preco);
     printf("QUANTIDADE: %d\n", p.qtd);
 }

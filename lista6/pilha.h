@@ -58,6 +58,12 @@ void imprime_pilha (Pilha* pilha);
  */
 void imprime_pessoa(Pessoa *p);
 
+/*Libera a memoria ocupada pela pessoa
+* inputs: uma pessoa
+* output: NULL
+* pre-condicao: Pessoa nao nula
+* pos-condicao: Toda memoria eh liberada
+*/
 void destroi_pessoa(Pessoa* p);
 
 /*Libera a memoria ocupada pela pilha

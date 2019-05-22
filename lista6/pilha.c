@@ -10,8 +10,8 @@
   */
 typedef struct pessoa{
     char *nome;
-    int idade;
     char *endereco;
+    int idade;
 }Pessoa;
 
 
@@ -72,7 +72,7 @@ Pessoa* pop(Pilha* pilha){
     else
     {
         pilha -> Topo = pilha -> Topo - 1;
-        return pilha -> vetPessoas[pilha -> Topo + 1];
+        return pilha -> vetPessoas[pilha -> Topo];
     }
 }
 
@@ -106,6 +106,12 @@ void imprime_pessoa(Pessoa *p){
     printf("Endereco: %s\n", p -> endereco);
 }
 
+/*Libera a memoria ocupada pela pessoa
+* inputs: uma pessoa
+* output: NULL
+* pre-condicao: Pessoa nao nula
+* pos-condicao: Toda memoria eh liberada
+*/
 void destroi_pessoa(Pessoa* p){
     free(p -> nome);
     free(p -> endereco);

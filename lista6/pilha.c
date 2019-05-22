@@ -31,7 +31,7 @@ typedef struct pilha{
 * pos-condicao: P est� definida e vazia
 */
 Pilha* cria_pilha(){
-    Pilha* p = (Pilha*)malloc(sizeof(Pilha));
+    Pilha* p = (Pilha*) malloc(sizeof(Pilha));
     p -> Topo = 0;
     return p;
 }
@@ -44,15 +44,15 @@ Pilha* cria_pilha(){
 do topo
 */
 void push(Pessoa* pessoa, Pilha* pilha){
-    if(pilha -> Topo >= 9)
+    if(pilha -> Topo == 10)
     {
         printf("Esta pilha esta cheia!!");
         return;
     }
     else
     {
-        pilha -> vetPessoas[pilha -> Topo + 1] = pessoa;
-        pilha -> Topo = pilha -> Topo + 1;
+        pilha -> vetPessoas[pilha -> Topo] = pessoa;
+        pilha -> Topo ++;
     }
 }
 
@@ -84,9 +84,12 @@ Pessoa* pop(Pilha* pilha){
  * pos-condicao: Pilha permanece inalterada
  */
 void imprime_pilha (Pilha* pilha){
+    // if(pilha -> Topo == 0){
+    //     return;
+    // }
     for(int i = 0; i < pilha -> Topo; i++){
         imprime_pessoa(pilha -> vetPessoas[i]);
-        printf("============================");
+        printf("============================\n");
     }
 }
 
@@ -103,13 +106,26 @@ void imprime_pessoa(Pessoa *p){
     printf("Endereco: %s\n", p -> endereco);
 }
 
+void destroi_pessoa(Pessoa* p){
+    free(p -> nome);
+    free(p -> endereco);
+    free(p);
+}
+
 /*Libera a memoria ocupada pela pilha
 * inputs: a Pilha
 * output: NULL
 * pre-condicao: Pilha n�o � nula
 * pos-condicao: Toda memoria eh liberada
 */
-Pilha* destroi_pilha(Pilha* pilha);
+Pilha* destroi_pilha(Pilha* pilha){
+    for(int i = 0; i < pilha -> Topo; i++){
+        destroi_pessoa(pilha -> vetPessoas[i]);
+    }
+    free(pilha);
+
+    return NULL;
+}
 
 
 /*Inicializa um TipoItem Pessoa

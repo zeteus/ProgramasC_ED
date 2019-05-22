@@ -58,6 +58,8 @@ void imprime_pilha (Pilha* pilha);
  */
 void imprime_pessoa(Pessoa *p);
 
+void destroi_pessoa(Pessoa* p);
+
 /*Libera a memoria ocupada pela pilha
 * inputs: a Pilha
 * output: NULL

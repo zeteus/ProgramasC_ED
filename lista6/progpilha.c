@@ -50,18 +50,21 @@ int main()
     
     printf ("---------- Imprime pilha-----------\n");
     //Imprime a pilha com todas as pessoas
+    puts("\n\nPILHA 1");
     imprime_pilha(p);
+    puts("\n\nPILHA 2");
     imprime_pilha(p2);
 
     // Retira pessoa da pilha p e coloca na pilha p2
     push (pop (p), p2);
-
+    puts("\n\nPILHA 1 NOVA");
     imprime_pilha(p);
+    printf("\n\nPILHA 2 NOVA");
     imprime_pilha(p2);
     
     //libera a mem�ria ocupada pelas pilhas
-    // p = destroi_pilha(p);
-    // p2 = destroi_pilha(p2);
+    p = destroi_pilha(p);
+    p2 = destroi_pilha(p2);
     
     return 0;
 }

@@ -11,6 +11,12 @@
 #include "pilha.h"
 #define MaxTam 10
 
+struct pessoa{
+   char* nome;
+   char* end;
+   int idade;
+};
+
 struct pilha{
     int topo;
     Pessoa* vet[MaxTam];

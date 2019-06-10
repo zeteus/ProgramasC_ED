@@ -6,7 +6,7 @@
 */
 #include <stdio.h>
 #include <stdlib.h>
-#include "fila.h"
+#include "filaVet.h"
 
 int main()
 {
@@ -98,5 +98,8 @@ int main()
 
     //libera a mem�ria ocupada pela fila 
     f = destroi_fila(f);
+    f_maiores = destroi_fila(f_maiores);
+    f_menores = destroi_fila(f_menores);
 
+    destroi_pessoa(pessoa11);
 }

@@ -6,11 +6,7 @@
   - idade (int)
   - endereco (string)
   */
-typedef struct pessoa{
-   char* nome;
-   char* end;
-   int idade;
-}Pessoa;
+typedef struct pessoa Pessoa;
 
 
 /*Tipo que define a Pilha (tipo opaco)
@@ -45,6 +41,7 @@ void push(Pessoa* pessoa, Pilha* pilha);
 */
 Pessoa* pop(Pilha* pilha);
 
+void destroi_pessoa(Pessoa* p);
 
 /*Libera a memoria ocupada pela pilha
 * inputs: a Pilha

@@ -1,7 +1,7 @@
-#ifndef FILA_H_
-#define FILA_H_
+#ifndef FILA_VET_H_
+#define FILA_VET_H_
+#include "pilha.h"
 
-struct pessoa;
 /*Tipo que define a fila (tipo opaco)
   Estrutura interna do tipo deve ser definida na implementa��o do TAD. Usar como base o TAD Pilha (pilha.h) - n�o usar outra estrutura de dados
   */
@@ -65,4 +65,4 @@ void separa_filas(Fila* f, Fila* f_maiores, Fila* f_menores);
 Fila* destroi_fila(Fila* f);
 
 
-#endif /* FILA_H_ */
+#endif /* FILA_VET_H_ */

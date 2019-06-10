@@ -1,12 +1,14 @@
 #include "stdio.h"
 #include "stdlib.h"
 #include "filaVet.h"
+#include "pilha.c"
+#define MaxTam 10
 
 /*Tipo que define a fila (tipo opaco)
   Estrutura interna do tipo deve ser definida na implementa��o do TAD. Usar como base o TAD Pilha (pilha.h) - n�o usar outra estrutura de dados
   */
 typedef struct fila{
-    struct pessoa pessoa[MaxTam];
+    Pessoa *pessoa[MaxTam];
     int first, last;
     int quant;
 } Fila;
@@ -35,12 +37,13 @@ void insere (Pessoa* pessoa, Fila* f){
         return;
     else{
         if(f -> quant == MaxTam){
-            printf("\nFILA CHEIA\n");
+            // printf("\nFILA CHEIA\n");
             return;
-        }
-    } else{
+        } else{
         f -> pessoa[f -> last] = pessoa;
         f -> last = (f -> last + 1) % MaxTam;
+        f -> quant++;
+        }
     }
 }
 
@@ -51,22 +54,19 @@ void insere (Pessoa* pessoa, Fila* f){
 * pos-condicao: fila n�o cont�m a pessoa que estava na primeira posicao */
 Pessoa* retira (Fila* f){
     if(f == NULL)
-        return;
+        return NULL;
     else{
         if(Vazia_fila(f)){
             printf("\nFILA VAZIA\n");
-            return;
-        }
-    } else{
+            return NULL;
+        }else{
         Pessoa* pAux = f -> pessoa[f -> first];
-        free(f -> pessoa[f -> first] -> nome);
-        free(f -> pessoa[f -> first] -> end);
-        free(f -> pessoa[f -> first]);
         f -> first = (f -> first + 1) % MaxTam;
+        f -> quant--;
         return pAux;
+        }
     }
 }
-
 
 /*Imprime os dados de todos as pessoas da fila (do inicio ao fim da fila!). Imprime mensagem de fila vazia, caso a fila esteja vazia.
 * inputs: a fila de pessoas
@@ -80,7 +80,7 @@ void imprime_fila (Fila* f){
     for(j = 0; j < f -> quant; j++){
         printf ("Pessoa: %s\n", f -> pessoa[i] -> nome);
 		printf ("Idade: %d\n", f -> pessoa[i] -> idade);
-		printf ("Endereco: %s\n", f -> pessoa[i] -> end);
+		printf ("Endereco: %s\n", f -> pessoa[i] ->end);
 		printf ("\n");
 
         i = (i + 1) % MaxTam;
@@ -94,7 +94,7 @@ void imprime_fila (Fila* f){
 * pre-condicao: fila n�o � nula
 * pos-condicao: nenhuma
 */
-int Vazia_fila (Fila* f){
+int Vazia_fila(Fila* f){
     return (f -> quant == 0);
 }
 
@@ -105,9 +105,9 @@ int Vazia_fila (Fila* f){
 * pre-condicao: fila f n�o � nula
 * pos-condicao: fila f vazia, pessoas com idade maior ou igual a 60 na fila "f_maiores" e as pessoas com idade menor que 60 para a fila "f_menores" */
 void separa_filas (Fila* f, Fila* f_maiores, Fila* f_menores){
-    while(!vazia_fila(f)){
+    while(!Vazia_fila(f)){
         Pessoa *pAvalia = retira(f);
-        if(f -> pAvalia -> idade > 60)
+        if(retorna_idade(pAvalia) > 60)
             insere(pAvalia, f_maiores);
         else
             insere(pAvalia, f_menores);
@@ -122,12 +122,14 @@ void separa_filas (Fila* f, Fila* f_maiores, Fila* f_menores){
 Fila* destroi_fila (Fila* f){
     Pessoa * p;
 
-    while(!vazia_fila(f)){
+    while(!Vazia_fila(f)){
         p = retira(f);
+
         free(p -> nome);
         free(p -> end);
         free(p);
     }
+    free(f);
 
     return NULL;
 }

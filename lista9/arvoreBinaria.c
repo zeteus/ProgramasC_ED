@@ -1,4 +1,6 @@
 #include "ArvoreBinaria.h"
+#include "stdio.h"
+#include "stdlib.h"
 
 /**
 Contem um inteiro e dois apontadores (esquerda/direita)
@@ -21,6 +23,18 @@ ArvBin* cria_ArvBin(){
     return raiz;
 }
 
+/**
+Inicializa um NO com sua Esq e Dir igual a NULL
+retorna: No criado
+*/
+ArvBin cria_NO(int valor){
+    NO* noAux = malloc(sizeof(NO));
+    noAux -> pEsq = NULL;
+    noAux -> pDir = NULL;
+    noAux -> num = valor;
+    
+    return noAux;
+}
 
 /**
 Insere 'valor' na árvore utilizando a regra que o filho esquerdo é menor que a raiz que é menor o filho direito.
@@ -28,17 +42,14 @@ Insere 'valor' na árvore utilizando a regra que o filho esquerdo é menor que a
 Retorna: 1 em caso de sucesso. 
 */
 int insere_ArvBin(ArvBin* raiz, int valor){
-    if(raiz == NULL){
-        NO *noAux = (NO*) malloc(sizeof(NO));
-        noAux -> pEsq = NULL;
-        noAux -> pDir = NULL;
-        noAux -> num = valor;
-        noAux = raiz;
+    if(estaVazia_ArvBin(raiz)) return 0;
+    if(*raiz == NULL){
+        *raiz = cria_NO(valor);
         return 1;
     }
 
-    if(raiz -> num > valor) return insere_ArvBin(raiz -> pEsq, valor);
-    if(raiz -> num < valor) return insere_ArvBin(raiz -> pDir, valor);
+    if((*raiz) -> num > valor) return insere_ArvBin((*raiz) -> pEsq, valor);
+    if((*raiz) -> num < valor) return insere_ArvBin((*raiz) -> pDir, valor);
     
     return 0;
 }
@@ -52,9 +63,9 @@ int consulta_ArvBin(ArvBin *raiz, int valor){
         printf("\nARVORE VAZIA!\n");
         return 0;
     }
-    if(raiz -> num > valor) return consulta_ArvBin(raiz -> pEsq, valor);
-    if(raiz -> num < valor) return consulta_ArvBin(raiz -> pDir, valor);
-    return raiz -> num;
+    if((*raiz) -> num > valor) return consulta_ArvBin((*raiz) -> pEsq, valor);
+    if((*raiz) -> num < valor) return consulta_ArvBin((*raiz) -> pDir, valor);
+    return (*raiz) -> num;
 }
 
 /**
@@ -91,26 +102,29 @@ int totalNO_ArvBin(ArvBin *raiz){
 
 /** Imprime em pre-ordem */ 
 void preOrdem_ArvBin(ArvBin *raiz){
-    if(raiz == NULL) return;
-    printf("%d\n", raiz -> num);
-    preOrdem_ArvBin(raiz -> pEsq);
-    preOrdem_ArvBin(raiz -> pDir);
+    if(estaVazia_ArvBin(raiz)) return;
+    if((*raiz) == NULL) return;
+    printf("%d\n", (*raiz) -> num);
+    preOrdem_ArvBin((*raiz) -> pEsq);
+    preOrdem_ArvBin((*raiz) -> pDir);
 }
 
 /** Imprime em-ordem */ 
 void emOrdem_ArvBin(ArvBin *raiz){
-    if(raiz == NULL) return;
-    preOrdem_ArvBin(raiz -> pEsq);
-    printf("%d\n", raiz -> num);
-    preOrdem_ArvBin(raiz -> pDir);
+    if(estaVazia_ArvBin(raiz)) return;
+    if((*raiz) == NULL) return;
+    preOrdem_ArvBin((*raiz) -> pEsq);
+    printf("%d\n", (*raiz) -> num);
+    preOrdem_ArvBin((*raiz) -> pDir);
 }
 
 /** Imprime em pós-ordem */ 
 void posOrdem_ArvBin(ArvBin *raiz){
-    if(raiz == NULL) return;
-    preOrdem_ArvBin(raiz -> pEsq);
-    preOrdem_ArvBin(raiz -> pDir);
-    printf("%d\n", raiz -> num);
+    if(estaVazia_ArvBin(raiz)) return;
+    if((*raiz) == NULL) return;
+    preOrdem_ArvBin((*raiz) -> pEsq);
+    preOrdem_ArvBin((*raiz) -> pDir);
+    printf("%d\n", (*raiz) -> num);
 }
 
 
@@ -119,8 +133,9 @@ Libera a árvore binária da memória
 */
 void libera_ArvBin(ArvBin *raiz){
     if(!estaVazia_ArvBin(raiz)){
-        libera_ArvBin(raiz -> pEsq);
-        libera_ArvBin(raiz -> pDir);
+        libera_ArvBin((*raiz) -> pEsq);
+        libera_ArvBin((*raiz) -> pDir);
+        free((*raiz));
         free(raiz);
     }
 }

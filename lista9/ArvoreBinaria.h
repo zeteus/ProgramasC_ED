@@ -10,6 +10,11 @@ retorna: Raiz alocada e apontada para NULL
 */
 ArvBin* cria_ArvBin();
 
+/**
+Inicializa um NO com sua Esq e Dir igual a NULL
+retorna: No criado
+*/
+ArvBin cria_NO(int valor);
 
 /**
 Insere 'valor' na árvore utilizando a regra que o filho esquerdo é menor que a raiz que é menor o filho direito.

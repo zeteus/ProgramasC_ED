@@ -2,7 +2,7 @@
 /**
 Contem um inteiro e dois apontadores (esquerda/direita)
 */
-typedef struct NO* ArvBin;
+typedef struct tNO* ArvBin;
 
 /**
 Inicializa a árvore e deixa a raiz NULL
@@ -32,7 +32,7 @@ int consulta_ArvBin(ArvBin *raiz, int valor);
 /**
 Verifica se a árvore está vazia
 */
-int estaVazia_ArvBin(ArvBin *raiz);
+int estaVazia_ArvBin(ArvBin raiz);
 
 /* 
 Conta o número de nós não-folha de uma árvore binária 

@@ -82,21 +82,33 @@ int estaVazia_ArvBin(ArvBin raiz){
 Conta o número de nós não-folha de uma árvore binária 
 retorna: Numero de nós não folha
 */
-int totalNaoFolha_Arvbin(ArvBin *raiz){
-    return 0;
+int totalNaoFolha_ArvBin(ArvBin *raiz){
+    if(estaVazia_ArvBin(*raiz)) return 0;
+    return totalNO_ArvBin(raiz) - totalFolha_ArvBin(raiz);
 }
 
 /** 
 Conta o número de folhas de uma árvore binária.
 retorna: Numero de nós folhas
 */
-int totalFolha_Arvbin(ArvBin *raiz){
-    return 0;
+int totalFolha_ArvBin(ArvBin *raiz){
+    if(raiz == NULL) return 0;
+    
+    if(estaVazia_ArvBin(*raiz)) return 0;
+    if(((*raiz) -> pEsq == NULL) && ((*raiz) -> pDir == NULL)){
+        return 1;
+    }else{
+        return totalFolha_ArvBin(&(*raiz) -> pEsq) + totalFolha_ArvBin(&(*raiz) -> pDir);
+    }
 }
 
 /*conta o número de nós de uma árvore binária. */
 int totalNO_ArvBin(ArvBin *raiz){
-    return 0;
+    if(raiz == NULL) return 0;
+    
+    if(estaVazia_ArvBin(*raiz)) return 0;
+
+    return totalNO_ArvBin(&(*raiz) -> pEsq) + 1 + totalNO_ArvBin(&(*raiz) -> pDir);
 }
 
 /** Imprime em pre-ordem */ 
@@ -126,7 +138,9 @@ void posOrdem_ArvBin(ArvBin *raiz){
     printf("%d\n", (*raiz) -> num);
 }
 
-
+/**
+Libera um NO da memória
+*/
 void libera_secretaco(ArvBin *raiz){
     if(!estaVazia_ArvBin(*raiz)){
         if(!(*raiz) -> pEsq == NULL){
@@ -136,7 +150,6 @@ void libera_secretaco(ArvBin *raiz){
         libera_ArvBin(&(*raiz) -> pDir);
         }
     }
-    printf("Dando free no %d\n", (*raiz)->num);
     free(*raiz);
 }
 /**

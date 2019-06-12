@@ -9,7 +9,7 @@ int main(){
 
     int i;
     for(i=0; i < N; i++)
-        insere_ArvBin(raiz,dados[i])
+        insere_ArvBin(raiz,dados[i]);
     
     //Alterar o valor de p para testar valores que existem e não
     int p = 36;
@@ -18,6 +18,12 @@ int main(){
     else
 	printf("Elemento %d nao encontrado\n", p);
 	
+    int folha = totalFolha_ArvBin(raiz);
+    printf("FOLHAS: %d\n", folha);
+    int no = totalNO_ArvBin(raiz);
+    printf("NOS: %d\n", no);
+    int nFolha = totalNaoFolha_ArvBin(raiz);
+    printf("NAO FOLHAS: %d\n", nFolha);
 
     emOrdem_ArvBin(raiz);
     printf("\n");

@@ -38,13 +38,13 @@ int estaVazia_ArvBin(ArvBin raiz);
 Conta o número de nós não-folha de uma árvore binária 
 retorna: Numero de nós não folha
 */
-int totalNaoFolha_Arvbin(ArvBin *raiz);
+int totalNaoFolha_ArvBin(ArvBin *raiz);
 
 /** 
 Conta o número de folhas de uma árvore binária.
 retorna: Numero de nós folhas
 */
-int totalFolha_Arvbin(ArvBin *raiz);
+int totalFolha_ArvBin(ArvBin *raiz);
 
 /*conta o número de nós de uma árvore binária. */
 int totalNO_ArvBin(ArvBin *raiz);
@@ -58,6 +58,10 @@ void emOrdem_ArvBin(ArvBin *raiz);
 /** Imprime em pós-ordem */ 
 void posOrdem_ArvBin(ArvBin *raiz);
 
+/**
+Libera um NO da memória
+*/
+void libera_secretaco(ArvBin *raiz);
 
 /**
 Libera a árvore binária da memória
